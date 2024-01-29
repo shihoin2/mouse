@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Image;
+use Illuminate\Support\Facades\Storage;
 
 class VisionController extends Controller
 {
@@ -27,6 +29,25 @@ class VisionController extends Controller
     //
   }
 
+  /**
+   * 画像の保存
+   * board_idを取得して保存
+   */
+  public function imageStore(Request $request, $id)
+  {
+    // 保存するディレクトリ名
+    $dir = 'sample';
+    //getClientOriginalNameメソッドでアップロードされたファイル名を取得
+    $file_name = $requst->file('image')->getClientOriginalName();
+
+    // アップロードされたファイルをpublic/sampleに取得したファイル名で保存
+    $request->file('image')->storeAs('public/' . $dir, $file_name);
+
+    //ファイル情報をDBに保存
+    $image = new Image();
+    $image->image_name = $file_name;
+    $image->save();
+  }
   /**
    * ボードの更新
    */

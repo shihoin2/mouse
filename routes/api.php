@@ -19,6 +19,7 @@ Route::prefix('vision')
     Route::get('/{id}', 'get')->name('get');
     Route::post('/', 'create')->name('create');
     Route::post('/', 'store')->name('store');
+    Route::post('/{id}', 'imageStore')->name('imageStore');
     Route::put('/{id}', 'update')->name('update');
     Route::delete('/{id}', 'destroy')->name('destroy');
   });
