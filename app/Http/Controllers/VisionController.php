@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Image;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 
 class VisionController extends Controller
@@ -34,19 +35,22 @@ class VisionController extends Controller
    * board_idを取得して保存
    */
   public function imageStore(Request $request, $id)
-  {
-    // 保存するディレクトリ名
-    $dir = 'sample';
-    //getClientOriginalNameメソッドでアップロードされたファイル名を取得
-    $file_name = $requst->file('image')->getClientOriginalName();
+  { //  画像がある場合
+    if ($request->hasFile('image'))
+    {
+      //getClientOriginalNameメソッドでアップロードされたファイル名を取得
+      $file_name = $requst->file('image')->getClientOriginalName();
+      //Storage::pathへ引数にstorage以下の相対パスをいれることで、ディレクトリのフルパスを取得できる
+      $file_path = Storage::path('app/public/images');
 
-    // アップロードされたファイルをpublic/sampleに取得したファイル名で保存
-    $request->file('image')->storeAs('public/' . $dir, $file_name);
+      //Storageを使用し、任意の名前での画像の保存。'public'はconfigs/filesystem.phpに設定が書いてある。strage/app/public/imagesに保存
+      Storage::putFileAs('public' . '/images', $request->file('iamge'), $file_name);
 
-    //ファイル情報をDBに保存
-    $image = new Image();
-    $image->image_name = $file_name;
-    $image->save();
+      $image = new Image();
+      $image -> image_name = $file_name;
+      $image -> image_path = $file_path . '/' . $file_name;
+      $image ->save();
+    } else {
   }
   /**
    * ボードの更新

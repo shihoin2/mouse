@@ -17,6 +17,7 @@ class Image extends Model
     protected $fillable = [
         'id',
         'image_name',
+        'image_path',
         'board_id'
     ];
 }
