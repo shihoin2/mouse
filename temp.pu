@@ -1,0 +1,41 @@
+@startuml VisionBoardDB
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+
+entity "users" as users {
+* id
+--
+name
+}
+
+
+entity "templates" as templates {
+  *id
+  --
+  tpl_name
+  html
+  thumbnail
+}
+entity "boards" as boards {
+  *id
+  --
+  boards_name
+  user_id
+  edited_html
+  board_thumbnail
+}
+entity "images" as images {
+  *id
+  --
+  image_name
+  board_id
+}
+
+users ||--o{ boards
+boards ||--o{ images
+@enduml
