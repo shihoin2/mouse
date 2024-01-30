@@ -34,31 +34,33 @@ class VisionController extends Controller
    * 画像の保存
    * board_idを取得して保存
    */
-  public function imageStore(Request $request, $id)
+  // public function imageStore(Request $request, $id)
+  public function imageStore()
   {
+    return response()->json('成功');
     //Boardモデルのimagesからidを指定して探してくる。
-    $board = Board::with('images')->findOrFail($id);
-    //  画像がある場合
-    if ($request->hasFile('image'))
-    {
-      //getClientOriginalNameメソッドでアップロードされたファイル名を取得
-      $file_name = $requst->file('image')->getClientOriginalName();
-      //Storage::pathへ引数にstorage以下の相対パスをいれることで、ディレクトリのフルパスを取得できる
-      $file_path = Storage::path('app/public/images');
+    // $board = Board::with('images')->findOrFail($id);
+    // //  画像がある場合
+    // if ($request->hasFile('image'))
+    // {
+    //   //getClientOriginalNameメソッドでアップロードされたファイル名を取得
+    //   $file_name = $requst->file('image')->getClientOriginalName();
+    //   //Storage::pathへ引数にstorage以下の相対パスをいれることで、ディレクトリのフルパスを取得できる
+    //   $file_path = Storage::path('app/public/images');
 
-      //Storageを使用し、任意の名前での画像の保存。'public'はconfigs/filesystem.phpに設定が書いてある。strage/app/public/imagesに保存
-      Storage::putFileAs('public' . '/images', $request->file('iamge'), $file_name);
+    //   //Storageを使用し、任意の名前での画像の保存。'public'はconfigs/filesystem.phpに設定が書いてある。strage/app/public/imagesに保存
+    //   Storage::putFileAs('public' . '/images', $request->file('iamge'), $file_name);
 
-      //imagesテーブルにfile_nameとfile_pathを保存
-      $image = new Image();
-      $image -> image_name = $file_name;
-      $image -> image_path = $file_path . '/' . $file_name;
+    //   //imagesテーブルにfile_nameとfile_pathを保存
+    //   $image = new Image();
+    //   $image -> image_name = $file_name;
+    //   $image -> image_path = $file_path . '/' . $file_name;
 
-      //ボードIDをイメージテーブルに保存
-      $image->bard_id = $board->id;
+    //   //ボードIDをイメージテーブルに保存
+    //   $image->bard_id = $board->id;
 
-      $image ->save();
-    } else {
+    //   $image ->save();
+    // } else {
   }
   /**
    * ボードの更新
