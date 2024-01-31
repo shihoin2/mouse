@@ -11,12 +11,11 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('boards', function (Blueprint $table) {
+    Schema::create('texts', function (Blueprint $table) {
       $table->id();
-      $table->string('boards_name')->nullable()->change();
-      $table->foreignId('user_id')->constrained();
-      $table->longText('edited_html');
-      $table->string('board_thumbnail')->nullable()->change();
+      $table->string('text');
+      $table->string('area');
+      $table->foreignId('board_id')->constrained();
       $table->timestamps();
     });
   }
@@ -26,6 +25,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('boards');
+    Schema::dropIfExists('texts');
   }
 };
