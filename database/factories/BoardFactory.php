@@ -17,7 +17,11 @@ class BoardFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'boards_name' => fake()->text(15),
+            'user_id' => fake()->numberBetween(1, 1),
+            'tpl_id' => fake()->numberBetween(1, 1),
+            'edited_html' => fake()->text(150),
+            'board_thumbnail' => fake()->imageUrl(),
         ];
     }
 }

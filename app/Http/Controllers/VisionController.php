@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Image;
+use App\Models\Board;
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Storage;
 
 class VisionController extends Controller
 {
@@ -25,6 +29,33 @@ class VisionController extends Controller
   public function create()
   {
     //
+  }
+
+  /**
+   * 画像の保存
+   * board_idを取得して保存
+   */
+  // public function imageStore(Request $request, $id)
+  public function imageStore(Request $request)
+  {
+    //id受け渡しのとき
+      if ($request->hasFile('image')) {
+          $file_name = $request->file('image')->getClientOriginalName();
+          $file_path = $request->file('image')->storeAs('', $file_name);
+
+          $image = new Image();
+          $image->image_name = $file_name;
+          $image->image_path = $file_path;
+
+          $image->save();
+
+          $image = Image::latest()->first();
+          $imagePath = $image->image_path;
+          $imageUrl = asset('storage/' . $imagePath);
+          return response()->json(['image_url' => $imageUrl]);
+      } else {
+
+      }
   }
 
   /**
