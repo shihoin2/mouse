@@ -23,7 +23,9 @@ class Board extends Model
         'id',
         'boards_name',
         'user_id',
+        'tpl_id',
         'edited_html',
-        'board_thumbnail'
+        'board_thumbnail',
+        'updated_at'
     ];
 }

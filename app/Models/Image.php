@@ -18,6 +18,11 @@ class Image extends Model
         'id',
         'image_name',
         'image_path',
-        'board_id'
+        'board_id',
+        'updated_at'
+    ];
+    //board_idのデフォルト値を設定
+    protected $attributes = [
+        'board_id' => 5,
     ];
 }
