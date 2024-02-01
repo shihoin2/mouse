@@ -18,7 +18,7 @@ Route::prefix('vision_boards')
     Route::get('/', 'index')->name('index');
     Route::post('/', 'create')->name('create');
     Route::post('/{board_id}', 'imageStore')->name('imageStore');
-    // Route::get('/{image_id}', 'getImage')->name('getImage');
+    Route::patch('/capture/{board_id}', 'thumbnailPatch')->name('thumbnailPatch');
     Route::get('/{id}', 'edit')->name('edit');
     Route::put('/{id}', 'update')->name('update');
     Route::delete('/{id}', 'destroy')->name('destroy');
