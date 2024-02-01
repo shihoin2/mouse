@@ -20,7 +20,7 @@ Route::prefix('vision')
     Route::post('/', 'create')->name('create');
     Route::post('/', 'store')->name('store');
     Route::post('/{board_id}', 'imageStore')->name('imageStore');
-    // Route::get('/{image_id}', 'getImage')->name('getImage');
+    Route::patch('/capture/{board_id}', 'thumbnailPatch')->name('thumbnailPatch');
     Route::put('/{id}', 'update')->name('update');
     Route::delete('/{id}', 'destroy')->name('destroy');
   });
