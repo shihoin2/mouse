@@ -36,6 +36,14 @@ entity "images" as images {
   board_id
 }
 
+entity "texts" as texts {
+  *id
+  --
+  text
+  area
+  board_id
+}
+
 users ||--o{ boards
 boards ||--o{ images
 @enduml
