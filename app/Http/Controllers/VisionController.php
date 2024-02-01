@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Models\Text;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
 
@@ -16,7 +17,10 @@ class VisionController extends Controller
    */
   public function index()
   {
-    return response()->json('成功！');
+    $response = [
+      "message" => "indexルート",
+    ];
+    return response()->json($response);
   }
 
   /**
@@ -32,7 +36,32 @@ class VisionController extends Controller
       "edited_html" => ""
     ]);
 
-    return response()->json($board->id);
+    $areas = [
+      "lifeStyle",
+      "work",
+      "name_year",
+      "will",
+      "fun",
+      "health"
+    ];
+
+    $textBoxes = [];
+    foreach ($areas as $area) {
+      $data = Text::create([
+        'area' => $area,
+        'text' => "",
+        "board_id" => $board->id
+      ]);
+      $textBoxes[] = [$area => $data->text];
+    }
+
+    $response = [
+      "message" => "createルート",
+      "board_id" => $board->id,
+      "textBoxes" => $textBoxes
+    ];
+
+    return response()->json($response);
   }
 
   /**
@@ -40,10 +69,25 @@ class VisionController extends Controller
    */
   public function edit(string $id)
   {
-    $message = "edit:通信成功！";
     $board = Board::find($id);
-    $edited_html = $board->edited_html;
-    return response()->json([$message, $edited_html]);
+    $texts_data = Text::where('board_id', $id)->get();
+
+    $textBoxes = [];
+    if ($texts_data) {
+      foreach ($texts_data as $text_data) {
+        $textBoxes[$text_data->area] = $text_data->text;
+      }
+    } else {
+      $textBoxes = "空でした";
+    }
+
+
+    $response = [
+      "message" => "editルート",
+      "edited_html" => $board->edited_html,
+      "textBoxes" => $textBoxes,
+    ];
+    return response()->json($response);
   }
 
   /**
@@ -51,9 +95,9 @@ class VisionController extends Controller
    */
   public function update(Request $request, string $id)
   {
-    $message = "update:成功！";
-
     $board = Board::find($id);
+    $texts_data = Text::where(['board_id' => $id])->get();
+
     if ($board === null) {
       $res = response()->json(
         [
@@ -63,13 +107,30 @@ class VisionController extends Controller
       );
       throw new HttpResponseException($res);
     }
-    $edited_html = $board->edited_html;
 
     $board->edited_html = $request->edited_html;
     $board->save();
 
+    $textBoxes = [];
+    foreach ($texts_data as $text_data) {
+      if ($request->textBoxes[$text_data->area]) {
+        $text_data->text = $request->textBoxes[$text_data->area];
+      } else {
+        $text_data->text = "";
+      }
+      $text_data->save();
+      $textBoxes[$text_data->area] = $text_data->text;
+    }
+    // $texts_data->save();
 
-    return response()->json([$edited_html]);
+
+    $response = [
+      "message" => "updateルート",
+      "edited_html" => $board->edited_html,
+      "textBoxes" => $textBoxes
+    ];
+
+    return response()->json($response);
   }
 
   /**

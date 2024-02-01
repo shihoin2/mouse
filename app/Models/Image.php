@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    public function board()
-    {
-        return $this->belongsTo(Board::class);
-    }
+  public function board()
+  {
+    return $this->belongsTo(Board::class);
+  }
 
-    protected $fillable = [
-        'id',
-        'image_name',
-        'board_id'
-    ];
+  protected $fillable = [
+    'id',
+    'image_name',
+    'board_id'
+  ];
 }
