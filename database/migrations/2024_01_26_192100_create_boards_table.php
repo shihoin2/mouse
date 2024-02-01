@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('boards_name');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('tpl_id')->constrained();
             $table->longText('edited_html');
             $table->string('board_thumbnail');
             $table->timestamps();

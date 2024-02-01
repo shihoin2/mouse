@@ -15,3 +15,4 @@ class Template extends Model
         'html',
         'thumbnail'
     ];
+}
