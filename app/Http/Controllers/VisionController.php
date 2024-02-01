@@ -57,6 +57,37 @@ class VisionController extends Controller
 
       }
   }
+  /**
+   * 画像の保存
+   * board_idを取得して保存
+   */
+  // public function thumbnailStore(Request $request)
+  public function thumbnailPatch(Request $request)
+{
+    if ($request->has('image')) {
+        // データURLから画像ファイルを作成
+        $imageData = $request->input('image');
+        $imageData = str_replace('data:image/png;base64,', '', $imageData);
+        $imageData = str_replace(' ', '+', $imageData);
+        $imageBinary = base64_decode($imageData);
+
+        // 一意のファイル名を生成
+        $fileName = uniqid() . '.png';
+
+        // ファイル保存
+        $filePath = 'public/thumbnails/' . $fileName;
+        Storage::put($filePath, $imageBinary);
+
+        // データベースに保存一部を更新するには、save()ではなくupdate
+        Board::where('id', 5)->update([
+          'board_thumbnail' => $fileName,
+          'updated_at' => now(), // 更新日時を現在の日時に設定
+      ]);
+        return response()->json(['message' => 'Image saved successfully', 'board_thumbnail' => $fileName]);
+    } else {
+        return response()->json(['message' => 'No image data received'], 400);
+    }
+}
 
   /**
    * ボードの更新
