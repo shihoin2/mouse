@@ -13,6 +13,7 @@ class Template extends Model
     'id',
     'tpl_name',
     'html',
-    'thumbnail'
+    'thumbnail',
+    'updated_at'
   ];
 }

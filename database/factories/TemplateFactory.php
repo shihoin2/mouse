@@ -17,7 +17,9 @@ class TemplateFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'tpl_name' => fake()->text(15),
+            'html' => fake()->text(150),
+            'thumbnail' => fake()->imageUrl(),
         ];
     }
 }

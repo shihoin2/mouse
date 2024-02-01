@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\Text;
+use App\Models\Image;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
+use Illuminate\Contracts\Cache\Store;
+use Illuminate\Support\Facades\Storage;
 
 class VisionController extends Controller
 {
@@ -81,7 +83,6 @@ class VisionController extends Controller
       $textBoxes = "空でした";
     }
 
-
     $response = [
       "message" => "editルート",
       "edited_html" => $board->edited_html,
@@ -89,6 +90,34 @@ class VisionController extends Controller
     ];
     return response()->json($response);
   }
+
+  /**
+   * 画像の保存
+   * board_idを取得して保存
+   */
+  // public function imageStore(Request $request, $id)
+  public function imageStore(Request $request)
+  {
+    //id受け渡しのとき
+    if ($request->hasFile('image')) {
+      $file_name = $request->file('image')->getClientOriginalName();
+      $file_path = $request->file('image')->storeAs('', $file_name);
+
+      $image = new Image();
+      $image->image_name = $file_name;
+      $image->image_path = $file_path;
+
+      $image->save();
+
+      $image = Image::latest()->first();
+      $imagePath = $image->image_path;
+      $imageUrl = asset('storage/' . $imagePath);
+      return response()->json(['image_url' => $imageUrl]);
+    } else {
+    }
+  }
+
+
 
   /**
    * ボードの更新
@@ -121,7 +150,7 @@ class VisionController extends Controller
       $text_data->save();
       $textBoxes[$text_data->area] = $text_data->text;
     }
-    // $texts_data->save();
+    // $texts_data->save()
 
 
     $response = [

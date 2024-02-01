@@ -17,6 +17,12 @@ class Image extends Model
   protected $fillable = [
     'id',
     'image_name',
-    'board_id'
+    'image_path',
+    'board_id',
+    'updated_at'
+  ];
+  //board_idのデフォルト値を設定
+  protected $attributes = [
+    'board_id' => 5,
   ];
 }
