@@ -12,14 +12,15 @@ use App\Http\Controllers\FeedTemplateController;
 
 Route::get('/test', [TestController::class, 'index']);
 
-Route::prefix('vision')
-  ->name('vision.')
+Route::prefix('vision_boards')
+  ->name('vision_boards.')
   ->controller(VisionController::class)
   ->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/{id}', 'get')->name('get');
     Route::post('/', 'create')->name('create');
-    Route::post('/', 'store')->name('store');
+    Route::post('/{board_id}', 'imageStore')->name('imageStore');
+    Route::patch('/capture/{board_id}', 'thumbnailPatch')->name('thumbnailPatch');
+    Route::get('/{id}', 'edit')->name('edit');
     Route::put('/{id}', 'update')->name('update');
     Route::delete('/{id}', 'destroy')->name('destroy');
   });

@@ -21,9 +21,9 @@ class TemplateFactory extends Factory
     public function definition(): array
     {
         return [
-            'tpl_name' => $this->faker->word(),
+            'tpl_name' => fake()->text(15),
             'html' => $this->faker->randomHtml(),
-            'thumbnail' => 'http://localhost/storage/sample.jpg'
+            'thumbnail' => fake()->imageUrl(),
         ];
     }
 }
