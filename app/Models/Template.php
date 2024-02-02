@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Template extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  protected $fillable = [
-    'id',
-    'tpl_name',
-    'html',
-    'thumbnail',
-    'updated_at'
-  ];
+    protected $fillable = [
+        'id',
+        'tpl_name',
+        'html',
+        'thumbnail',
+        'updated_at'
+    ];
 }
