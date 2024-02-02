@@ -22,8 +22,8 @@ class TemplateFactory extends Factory
     {
         return [
             'tpl_name' => fake()->text(15),
-            'html' => $this->faker->randomHtml(),
-            'thumbnail' => fake()->imageUrl(),
+            'html' => fake()->randomHtml(),
+            'thumbnail' => 'http://localhost/storage/sample.jpg',
         ];
     }
 }

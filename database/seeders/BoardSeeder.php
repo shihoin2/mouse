@@ -4,15 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Template;
+use App\Models\Board;
 
-class TemplateSeeder extends Seeder
+class BoardSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Template::factory()->count(20)->create();
+        Board::factory()->count(20)->create();
     }
 }
