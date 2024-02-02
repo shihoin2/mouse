@@ -18,10 +18,10 @@ class BoardFactory extends Factory
     {
         return [
             'boards_name' => fake()->text(15),
-            'user_id' => fake()->numberBetween(1, 1),
-            'tpl_id' => fake()->numberBetween(1, 1),
-            'edited_html' => fake()->text(150),
-            'board_thumbnail' => fake()->imageUrl(),
+            'user_id' => 1,
+            'tpl_id' => 1,
+            'edited_html' => fake()->randomHtml(),
+            'board_thumbnail' => 'http://localhost/storage/sample.jpg',
         ];
     }
 }

@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Generator as Faker;
+use App\Models\Template;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Template>
@@ -14,12 +16,14 @@ class TemplateFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Template::class;
+
     public function definition(): array
     {
         return [
             'tpl_name' => fake()->text(15),
-            'html' => fake()->text(150),
-            'thumbnail' => fake()->imageUrl(),
+            'html' => fake()->randomHtml(),
+            'thumbnail' => 'http://localhost/storage/sample.jpg',
         ];
     }
 }
