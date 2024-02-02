@@ -11,19 +11,17 @@ use App\Models\Template;
  */
 class TemplateFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    protected $model = Template::class;
-
-    public function definition(): array
-    {
-        return [
-            'tpl_name' => fake()->text(15),
-            'html' => fake()->randomHtml(),
-            'thumbnail' => 'http://localhost/storage/sample.jpg',
-        ];
-    }
+  /**
+   * Define the model's default state.
+   *
+   * @return array<string, mixed>
+   */
+  public function definition(): array
+  {
+    return [
+      'tpl_name' => fake()->text(15),
+      'html' => fake()->text(150),
+      'thumbnail' => "http://localhost/storage/スクリーンショット.png"
+    ];
+  }
 }

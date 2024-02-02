@@ -8,11 +8,11 @@ use App\Models\Template;
 
 class TemplateSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        Template::factory()->count(20)->create();
-    }
+  /**
+   * Run the database seeds.
+   */
+  public function run(): void
+  {
+    Template::factory()->count(20)->create();
+  }
 }
