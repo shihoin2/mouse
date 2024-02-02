@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            $table->string('boards_name')->nullable()->change();
+            $table->string('boards_name')->nullable();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('tpl_id')->constrained('templates');
+            $table->foreignId('tpl_id')->constrained('templates')->default(1);
             $table->longText('edited_html');
-            $table->string('board_thumbnail')->nullable()->change();
+            $table->string('board_thumbnail')->nullable();
             $table->timestamps();
         });
     }
