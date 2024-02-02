@@ -9,17 +9,17 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TemplateFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
-        return [
-            'tpl_name' => fake()->text(15),
-            'html' => fake()->text(150),
-            'thumbnail' => fake()->imageUrl(),
-        ];
-    }
+  /**
+   * Define the model's default state.
+   *
+   * @return array<string, mixed>
+   */
+  public function definition(): array
+  {
+    return [
+      'tpl_name' => fake()->text(15),
+      'html' => fake()->text(150),
+      'thumbnail' => "http://localhost/storage/スクリーンショット.png"
+    ];
+  }
 }
