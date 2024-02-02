@@ -9,6 +9,7 @@ use App\Models\Image;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class VisionController extends Controller
 {
@@ -156,6 +157,7 @@ class VisionController extends Controller
    */
   public function update(Request $request, string $id)
   {
+    Log::debug($request);
     $board = Board::find($id);
     $texts_data = Text::where(['board_id' => $id])->get();
 
