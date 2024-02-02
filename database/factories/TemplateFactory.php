@@ -16,12 +16,12 @@ class TemplateFactory extends Factory
    *
    * @return array<string, mixed>
    */
-  public function definition(): array
-  {
-    return [
-      'tpl_name' => fake()->text(15),
-      'html' => fake()->text(150),
-      'thumbnail' => "http://localhost/storage/スクリーンショット.png"
-    ];
-  }
+    public function definition(): array
+    {
+        return [
+        'tpl_name' => fake()->text(15),
+        'html' => fake()->text(150),
+        'thumbnail' => "http://localhost/storage/sample.jpg"
+        ];
+    }
 }
