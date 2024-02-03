@@ -98,22 +98,26 @@ class VisionController extends Controller
    * board_idを取得して保存
    */
   // public function imageStore(Request $request, $id)
-  public function imageStore(Request $request)
+  public function imageStore(Request $request, $board_id)
   {
     //id受け渡しのとき
     if ($request->hasFile('image')) {
       $file_name = $request->file('image')->getClientOriginalName();
-      $file_path = $request->file('image')->storeAs('', $file_name);
+      $file_path = $request->file('image')->storeAs('public', $file_name);
+
 
       $image = new Image();
       $image->image_name = $file_name;
       $image->image_path = $file_path;
+      $image->board_id = $board_id;
 
       $image->save();
 
       $image = Image::latest()->first();
-      $imagePath = $image->image_path;
-      $imageUrl = asset('storage/' . $imagePath);
+      // $imagePath = $image->image_path;
+      $imagePath = Storage::url($file_path);
+      // $imageUrl = asset('storage/' . $imagePath);
+      $imageUrl = asset('storage/' . $file_name);
       return response()->json(['image_url' => $imageUrl]);
     } else {
     }
@@ -123,7 +127,7 @@ class VisionController extends Controller
    * board_idを取得して保存
    */
   // public function thumbnailStore(Request $request)
-  public function thumbnailPatch(Request $request)
+  public function thumbnailPatch(Request $request, $board_id)
   {
     if ($request->has('image')) {
       // データURLから画像ファイルを作成
@@ -139,8 +143,9 @@ class VisionController extends Controller
       $filePath = 'public/thumbnails/' . $fileName;
       Storage::put($filePath, $imageBinary);
 
+
       // データベースに保存一部を更新するには、save()ではなくupdate
-      Board::where('id', 5)->update([
+      Board::where('id', $board_id)->update([
         'board_thumbnail' => $fileName,
         'updated_at' => now(), // 更新日時を現在の日時に設定
       ]);
