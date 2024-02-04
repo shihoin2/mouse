@@ -35,7 +35,7 @@ services:
       MYSQL_PASSWORD: '${DB_PASSWORD}'
       MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
-      - 'mysql-weave-server:/var/lib/mysql'
+      - 'mysql-mouse-server:/var/lib/mysql'
       - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
       - './docker/8.3/my.cnf:/etc/my.cnf'
     networks:
@@ -70,5 +70,5 @@ networks:
   sail:
     driver: bridge
 volumes:
-  mysql-weave-server:
+  mysql-mouse-server:
     driver: local

@@ -21,7 +21,7 @@ class TemplateFactory extends Factory
     return [
       'tpl_name' => fake()->text(15),
       'html' => fake()->text(150),
-      'thumbnail' => "http://localhost/storage/スクリーンショット.png"
+      'thumbnail' => "http://localhost/storage/demo.png"
     ];
   }
 }
