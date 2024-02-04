@@ -9,8 +9,8 @@ class DownloadController extends Controller
 {
   public function download(Request $request)
   {
-    // データベースから画像のパスを取得する処理（ここでは仮に'demo_tumbnail.png'を使用）
-    $imagePath = storage_path('app/public/demo_tumbnail.png');
+    // データベースから画像のパスを取得する処理（ここでは仮に'demo_thumbnail.png'を使用）
+    $imagePath = storage_path('app/public/demo_thumbnail.png');
 
     // Content-Dispositionヘッダーを含むレスポンスを返す
     $headers = [
