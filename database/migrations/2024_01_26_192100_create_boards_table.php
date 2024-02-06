@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('tpl_id')->constrained('templates')->default(1);
             $table->longText('edited_html');
-            $table->string('board_thumbnail')->nullable();
+            $table->string('board_thumbnail')->nullable()->default('http://localhost/storage/demo_thumbnail.png');
             $table->timestamps();
         });
     }
