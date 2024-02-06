@@ -9,20 +9,20 @@ return new class extends Migration
   /**
    * Run the migrations.
    */
-  public function up(): void
-  {
-    Schema::table('boards', function (Blueprint $table) {
-      $table->string('edited_html')->nullable(true)->change();
-    });
-  }
+    public function up(): void
+    {
+        Schema::table('boards', function (Blueprint $table) {
+            $table->string('edited_html')->nullable(true)->change();
+        });
+    }
 
   /**
    * Reverse the migrations.
    */
-  public function down(): void
-  {
-    Schema::table('boards', function (Blueprint $table) {
-      $table->string('edited_html')->nullable(false)->change();
-    });
-  }
+    public function down(): void
+    {
+        Schema::table('boards', function (Blueprint $table) {
+            $table->string('edited_html')->nullable(false)->change();
+        });
+    }
 };

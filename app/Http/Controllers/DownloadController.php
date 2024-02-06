@@ -7,19 +7,13 @@ use Illuminate\Http\Request;
 
 class DownloadController extends Controller
 {
-  public function download(Request $request)
-  {
-    // データベースから画像のパスを取得する処理（ここでは仮に'demo_thumbnail.png'を使用）
-    $imagePath = storage_path('app/public/demo_thumbnail.png');
-
-    // Content-Dispositionヘッダーを含むレスポンスを返す
-    $headers = [
-      'Content-Disposition' => 'attachment; filename="myVision.png"',
-      'Content-Type' => 'image/png', // 画像のMIMEタイプに合わせて適切なContent-Typeを設定
-    ];
-
-    // 画像データを直接レスポンスに設定
-    $imageData = file_get_contents($imagePath);
-    return response($imageData, 200, $headers);
-  }
+    public function download(Request $request)
+    {
+        // クエリパラメータから取得したURLから画像のPath作成
+        // DBのパスを変更すれば簡潔に書けるが、フロントやDBを少し変えないといけないため今回はこれでよしとする
+        $imagePath = storage_path('app/public/' . substr($request->query('imageUrl'), 25));
+        // file_get_contentsで画像のバイナリデータ取得 base64_encodeでbase64に変換
+        $base64 = base64_encode(file_get_contents($imagePath));
+        return response()->json($base64);
+    }
 }

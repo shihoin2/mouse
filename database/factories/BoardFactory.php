@@ -21,7 +21,7 @@ class BoardFactory extends Factory
             'user_id' => 1,
             'tpl_id' => 1,
             'edited_html' => fake()->randomHtml(),
-            'board_thumbnail' => 'http://localhost/storage/sample.jpg',
+            'board_thumbnail' => 'http://localhost/storage/demo_thumbnail.png',
         ];
     }
 }
